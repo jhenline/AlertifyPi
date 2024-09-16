@@ -111,6 +111,13 @@ def get_access_token():
 def control_lights_based_on_meetings(meetings):
     while True:
         now = datetime.now(local_tz)
+
+        # Calculate elapsed time
+        elapsed_time = now - script_start_time
+        if elapsed_time >= timedelta(hours=MAX_RUNTIME_HOURS):
+            print(f"Maximum runtime of {MAX_RUNTIME_HOURS} hours reached. Exiting script.")
+            break  # Exit the loop and end the script
+        
         print(f"Current time: {now.strftime('%Y-%m-%d %I:%M %p')}")
 
         # Flags to track if any meeting needs the lights to be on
